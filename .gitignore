@@ -1,0 +1,45 @@
+# Dependency directories
+node_modules/
+
+# Environment variables file
+.env
+
+# Logs
+logs/
+*.log
+
+# Editor files
+.vscode/
+.idea/
+
+# Mac OSX specific files
+.DS_Store
+
+# Build output
+build/
+dist/
+
+# Cache and generated files
+*.cache
+*.log*
+*.bak
+*.pid
+*.seed
+*.pid.lock
+*.pid.lock.lock
+*.dat
+*.out
+*.xml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Ignore npm debug log
+npm-debug.log*
