@@ -2,6 +2,7 @@ module.exports = {
     ROOT : "/v1/api",
     MODELS: {
         EXAMPLE: "/example",
+        essai:"/essai",
     },
     GET_ALL : "/",
     GET : "/get/:id",

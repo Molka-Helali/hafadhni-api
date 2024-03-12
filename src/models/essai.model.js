@@ -4,7 +4,10 @@ require('../configs/db.config');
 const essaiSchema = new mongoose.Schema({
     // Specific fields for example entity
     testDate: { type: Date },
-    name: { type: String }
+    name: { type: String },
+    score:[{
+        result:{type:Number}
+    }]
     // You can add more fields specific to products here
 });
 // Create a Mongoose model named "Example" based on the defined schema

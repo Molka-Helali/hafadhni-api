@@ -17,4 +17,4 @@ server.listen(SERVER.PORT, () => {
 });
 //code atlas
 //mC91gjFTcoCpdBGR
-//mongodb+srv://molkaHe:<mC91gjFTcoCpdBGR>@cluster0.qvoljzy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+//mongodb+srv://molkaHe:mC91gjFTcoCpdBGR@cluster0.qvoljzy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

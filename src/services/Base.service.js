@@ -39,7 +39,9 @@ class BaseService {
             if (hasImage) {
                 // If the request includes image files, upload them and add their filenames to the data
                 const uploadedImages = await this._uploadImages(req, res);
-                data.images = uploadedImages.map(file => file.filename);
+                if (uploadedImages) {
+                    data.images = uploadedImages.map(file => file.filename);
+                }
             }
             // Creating a new document in the MongoDB collection with the provided data
             return await this.model.create(data);
