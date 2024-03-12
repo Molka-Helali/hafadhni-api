@@ -12,4 +12,5 @@ module.exports = {
     UPLOAD:"/uploads",
 
     CUSTOM: "/custom",
+    PATCH_SCORE:"/score",
 };

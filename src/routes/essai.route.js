@@ -28,10 +28,10 @@ class essaiRoutes extends BaseRoute {
         await super.setupRoutes();
 
         // Binding the Custom method of the essaiController instance to the essaiController object
-        const getByPriceHandler = this.essaiController.Custom.bind(this.essaiController);
+        const UpdateScoreHandle = this.essaiController.Custom.bind(this.essaiController);
 
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
-        this.router.get(routes.CUSTOM, getByPriceHandler);
+        this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
     }
 }
 

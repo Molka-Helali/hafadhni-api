@@ -79,7 +79,7 @@ class BaseService {
         }
     }
     // Method to delete an entity from the database
-    async delete(id, hasImage = false) {
+    /*async delete(id, hasImage = false) {
         try {
             if (hasImage) {
                 // If the entity has associated images, delete them from the file system
@@ -91,6 +91,27 @@ class BaseService {
                         console.error(`Error deleting image ${t}:`, error);
                     }
                 }));
+            }
+            // Deleting the entity from the MongoDB collection by its ID
+            return await this.model.findByIdAndDelete(id);
+        } catch (error) {
+            throw new Error(`Error deleting entity: ${error.message}`);
+        }
+    }*/
+    async delete(id, hasImage = false) {
+        try {
+            if (hasImage) {
+                // If the entity has associated images, delete them from the file system
+                const temp = await this.getById(id);
+                if (temp && temp.images) {
+                    await Promise.all(temp.images.map(async (t) => {
+                        try {
+                            await this._deleteImage(t);
+                        } catch (error) {
+                            console.error(`Error deleting image ${t}:`, error);
+                        }
+                    }));
+                }
             }
             // Deleting the entity from the MongoDB collection by its ID
             return await this.model.findByIdAndDelete(id);
