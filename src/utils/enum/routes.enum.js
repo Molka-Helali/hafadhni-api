@@ -13,4 +13,6 @@ module.exports = {
 
     CUSTOM: "/custom",
     PATCH_SCORE:"/score",
+    PATCH_PHOTO:"/photo/:id",
+    PATCH_Text:"/text",
 };
