@@ -30,7 +30,7 @@ class essaiService extends BaseService {
   async customPhoto(data,_id) {
     try {
       await essai.findByIdAndUpdate(
-        { _id: data._id },
+         _id,
         { $push: { photo: data.photo } }
       );
       // Attempting to find entities in the essai model based on the provided data

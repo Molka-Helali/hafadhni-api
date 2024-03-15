@@ -6,6 +6,7 @@ const BaseRoute = require('./Base.route');
 
 // Importing the routes enum from the '../utils/enum/routes.enum' file
 const routes = require("../utils/enum/routes.enum");
+const multer = require("../middlewares/multer.middleware");
 
 // Defining a new class essaiRoutes which extends BaseRoute
 class essaiRoutes extends BaseRoute {

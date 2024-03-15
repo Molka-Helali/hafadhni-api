@@ -10,18 +10,17 @@ const essaiSchema = new mongoose.Schema({
             Poursantage: { type: Number },
             mention: { type: String }
     }],
-    photo:[{
+     photo:[{
         données: { type: String },
         path: { type: String },
         taille: { type: Number },
    }],
    text :[{
     contenu: { type: String },
-    }],
-
+    }]
     // You can add more fields specific to products here
 });
 // Create a Mongoose model named "Essai" based on the defined schema
-const Essai = mongoose.model('Essai', essaiSchema);
+const essai = mongoose.model('essai', essaiSchema);
 // Export the Example model to make it accessible from other modules
-module.exports = Essai;
+module.exports = essai;
