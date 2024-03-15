@@ -13,46 +13,42 @@ class essaiService extends BaseService {
   // Defining a custom method called custom that takes in data as a parameter
   async custom(data) {
     try {
-      await essai.findByIdAndUpdate(
+      // Updating the essai model by pushing the score data to the specified entity
+      return await essai.findByIdAndUpdate(
         { _id: data._id },
-        { $push: { score: data.score } },
-      
+        { $push: { score: data.score } }
       );
-      // Attempting to find entities in the essai model based on the provided data
-      return await essai.find(data);
     } catch (error) {
-      // Throwing an error if there's an issue fetching entities
-      throw new Error(`Error fetching entity by ID: ${error.message}`);
+      // Throwing an error if there's an issue updating the entity
+      throw new Error(`Error updating entity by ID: ${error.message}`);
     }
   }
 
-  // Defining a custom method called customPhoto that takes in data as a parameter
-  async customPhoto(data,_id) {
+  // Defining a custom method called customPhoto that takes in data and _id as parameters
+  async customPhoto(data, _id) {
     try {
-      await essai.findByIdAndUpdate(
-         _id,
+      // Updating the essai model by pushing the photo data to the specified entity
+      return await essai.findByIdAndUpdate(
+        { _id: data._id },
         { $push: { photo: data.photo } }
       );
-      // Attempting to find entities in the essai model based on the provided data
-      return await essai.find(data);
     } catch (error) {
-      // Throwing an error if there's an issue fetching entities
-      throw new Error(`Error fetching entity by ID: ${error.message}`);
+      // Throwing an error if there's an issue updating the entity
+      throw new Error(`Error updating entity by ID: ${error.message}`);
     }
   }
 
   // Defining a custom method called customText that takes in data as a parameter
   async customText(data) {
     try {
-      await essai.findByIdAndUpdate(
+      // Updating the essai model by pushing the Text data to the specified entity
+      return await essai.findByIdAndUpdate(
         { _id: data._id },
         { $push: { Text: data.Text } }
       );
-      // Attempting to find entities in the essai model based on the provided data
-      return await essai.find(data);
     } catch (error) {
-      // Throwing an error if there's an issue fetching entities
-      throw new Error(`Error fetching entity by ID: ${error.message}`);
+      // Throwing an error if there's an issue updating the entity
+      throw new Error(`Error updating entity by ID: ${error.message}`);
     }
   }
 }
