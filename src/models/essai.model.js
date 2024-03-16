@@ -24,3 +24,30 @@ const essaiSchema = new mongoose.Schema({
 const Essai = mongoose.model('Essai', essaiSchema);
 // Export the Example model to make it accessible from other modules
 module.exports = Essai;
+
+
+
+/*
+{
+  "score": [
+    {
+      "dateTime": "2024-03-16", 
+      "Poursantage": 85,
+      "mention": "Bien"
+    }
+  ],
+  "photo": [
+    {
+      "donnees": "Données de l'image ", 
+      "path": "/chemin/vers/l/image.jpg", 
+      "taille": 1024 
+    }
+  ],
+  "text": [
+    {
+      "contenu": "Contenu du texte" 
+    }
+  ]
+}
+
+*/

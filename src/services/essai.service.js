@@ -25,7 +25,7 @@ class essaiService extends BaseService {
   }
 
   // Defining a custom method called customPhoto that takes in data and _id as parameters
-  async customPhoto(data, _id) {
+  async customPhoto(data) {
     try {
       // Updating the essai model by pushing the photo data to the specified entity
       return await essai.findByIdAndUpdate(
@@ -39,12 +39,12 @@ class essaiService extends BaseService {
   }
 
   // Defining a custom method called customText that takes in data as a parameter
-  async customText(data) {
+  async CustomText(data) {
     try {
       // Updating the essai model by pushing the Text data to the specified entity
       return await essai.findByIdAndUpdate(
         { _id: data._id },
-        { $push: { Text: data.Text } }
+        { $push: { Text: data.Textext } }
       );
     } catch (error) {
       // Throwing an error if there's an issue updating the entity

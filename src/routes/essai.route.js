@@ -6,7 +6,7 @@ const BaseRoute = require('./Base.route');
 
 // Importing the routes enum from the '../utils/enum/routes.enum' file
 const routes = require("../utils/enum/routes.enum");
-const multer = require("../middlewares/multer.middleware");
+const multerMiddleware = require("../middlewares/multer.middleware");
 
 // Defining a new class essaiRoutes which extends BaseRoute
 class essaiRoutes extends BaseRoute {
@@ -16,6 +16,7 @@ class essaiRoutes extends BaseRoute {
 
         // Initializing an instance of essaiController and assigning it to the property essaiController of the essaiRoutes class
         this.essaiController = new essaiController();
+        this.multerMiddleware= new multerMiddleware();
 
         // Calling the setupRoutes method and catching any errors that occur
         this.setupRoutes().catch(error => {
@@ -38,8 +39,9 @@ class essaiRoutes extends BaseRoute {
 
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
         this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
-        this.router.patch(routes. PATCH_PHOTO, UpdatePhotoHandle);
+        this.router.patch(routes. PATCH_PHOTO,UpdatePhotoHandle);
         this.router.patch(routes. PATCH_Text, UpdateTextHandle );
+    
     }
 }
 

@@ -7,12 +7,12 @@ module.exports = {
     GET_ALL : "/",
     GET : "/get/:id",
     CREATE : "/create",
-    UPDATE : "/update/:id",
+    UPDATE : "/update",
     DELETE : "/delete/:id",
     UPLOAD:"/uploads",
 
     CUSTOM: "/custom",
     PATCH_SCORE:"/score",
-    PATCH_PHOTO:"/photo/:id",
+    PATCH_PHOTO:"/photo",
     PATCH_Text:"/text",
 };
