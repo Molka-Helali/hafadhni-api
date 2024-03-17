@@ -18,9 +18,10 @@ class MulterMiddleware {
         this.upload = multer({ storage: this.storage }).array("images", 5);
     }
     // Method to handle uploading of multiple images
-    uploadMultipleImages = (req, res) => {
+   uploadMultipleImages = (req, res) => {
         return req.files; // Return uploaded files
     };
+    
 }
 // Exporting the MulterMiddleware class to be used in other files
 module.exports = MulterMiddleware;

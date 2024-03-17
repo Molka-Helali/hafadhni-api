@@ -4,7 +4,6 @@ const essaiService = require('../services/essai.service');
 const essai = require("../models/essai.model");
 // Importing the IBaseController module from the "./IBase.controller" file
 const IBaseController = require("./IBase.controller");
-const { log } = require('handlebars');
 
 // Defining a new class essaiController which extends IBaseController
 class essaiController extends IBaseController {
@@ -20,16 +19,23 @@ class essaiController extends IBaseController {
     // Await and handle the promise returned by the service's custom method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.custom(req.body), res);
   }
+
   CustomPhoto = async (req, res) => {
     // Await and handle the promise returned by the service's customPhoto method, passing the data object as a parameter.
     await this.handleRequest(this.essaiService.customPhoto(req.body), res);
-  
   }
-  CustomText = async (req, res) => {
+
+  Text = async (req, res) => {
     // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
-    await this.handleRequest(this.essaiService.CustomText(req.body), res);
+    await this.handleRequest(this.essaiService.Text(req.body), res);
+  }
+
+  utilisateur = async (req, res) => {
+    // Await and handle the promise returned by the service's utilisateur method, passing the request body as a parameter.
+    await this.handleRequest(this.essaiService.utilisateur(req.body), res);
   }
 }
 
 // Exporting the essaiController class to be used in other modules
 module.exports = essaiController;
+

@@ -15,4 +15,5 @@ module.exports = {
     PATCH_SCORE:"/score",
     PATCH_PHOTO:"/photo",
     PATCH_Text:"/text",
+    PATCH_Utilisateur:"/utilisateur",
 };

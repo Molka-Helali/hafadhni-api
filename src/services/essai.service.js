@@ -39,12 +39,26 @@ class essaiService extends BaseService {
   }
 
   // Defining a custom method called customText that takes in data as a parameter
-  async CustomText(data) {
+  async Text(data) {
     try {
       // Updating the essai model by pushing the Text data to the specified entity
       return await essai.findByIdAndUpdate(
         { _id: data._id },
-        { $push: { Text: data.Textext } }
+        { $push: { text: data.text } }
+      );
+    } catch (error) {
+      // Throwing an error if there's an issue updating the entity
+      throw new Error(`Error updating entity by ID: ${error.message}`);
+    }
+  }
+
+  // Defining a custom method called utilisateur that takes in data as a parameter
+  async utilisateur(data) {
+    try {
+      // Updating the essai model by pushing the Text data to the specified entity
+      return await essai.findByIdAndUpdate(
+        { _id: data._id },
+        { $push: { utilisateur: data.utilisateur } }
       );
     } catch (error) {
       // Throwing an error if there's an issue updating the entity
