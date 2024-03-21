@@ -38,13 +38,16 @@ class essaiRoutes extends BaseRoute {
           const UpdateTextHandle  = this.essaiController.Text.bind(this.essaiController);
        // Binding the utilisateur method of the essaiController instance to the essaiController object
 const UpdateUtilisateurHandle = this.essaiController.utilisateur.bind(this.essaiController);
-
+       // Binding the utilisateur method of the essaiController instance to the essaiController object
+       
 
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
         this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
         this.router.patch(routes. PATCH_PHOTO,UpdatePhotoHandle);
         this.router.patch(routes. PATCH_Text, UpdateTextHandle );
         this.router.patch(routes. PATCH_Utilisateur, UpdateUtilisateurHandle );
+        
+        
     
     }
 }

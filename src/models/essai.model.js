@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-require('../configs/db.config');
-// Define a Mongoose schema for the "example" entity
+const bcrypt = require('bcrypt');
+
 const essaiSchema = new mongoose.Schema({
-    // Specific fields for example entity
     utilisateur: [{
         nom: { type: String },
         prenom: { type: String },
@@ -12,50 +11,20 @@ const essaiSchema = new mongoose.Schema({
     }],
     testDate: { type: Date },
     name: { type: String },
-    score:[{
+    score: [{
         dateTime: { type: Date },
-        Poursantage: { type: Number },
+        pourcentage: { type: Number }, // Corrected spelling of "pourcentage"
         mention: { type: String }
     }],
-    photo:[{
-        données: { type: String },
+    photo: [{
+        donnees: { type: String }, // Corrected spelling of "donnees"
         path: { type: String },
         taille: { type: Number },
-   }],
-   text :[{
-    contenu: { type: String },
+    }],
+    text: [{
+        contenu: { type: String },
     }]
-   
-    // You can add more fields specific to products here
 });
-// Create a Mongoose model named "Example" based on the defined schema
+
 const Essai = mongoose.model('Essai', essaiSchema);
-// Export the Example model to make it accessible from other modules
 module.exports = Essai;
-
-
-
-/*
-{
-  "score": [
-    {
-      "dateTime": "2024-03-16", 
-      "Poursantage": 85,
-      "mention": "Bien"
-    }
-  ],
-  "photo": [
-    {
-      "donnees": "Données de l'image ", 
-      "path": "/chemin/vers/l/image.jpg", 
-      "taille": 1024 
-    }
-  ],
-  "text": [
-    {
-      "contenu": "Contenu du texte" 
-    }
-  ]
-}
-
-*/

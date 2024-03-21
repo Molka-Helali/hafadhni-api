@@ -50,6 +50,7 @@ class IBaseController {
         // Call handleRequest method to handle the promise returned by service's delete method
         await this.handleRequest(this.service.delete(req.params.id, true), res);
     }
+    
 }
 // Export the IBaseController class to make it available for use in other modules
 module.exports = IBaseController;

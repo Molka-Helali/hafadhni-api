@@ -34,6 +34,7 @@ class essaiController extends IBaseController {
     // Await and handle the promise returned by the service's utilisateur method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.utilisateur(req.body), res);
   }
+  
 }
 
 // Exporting the essaiController class to be used in other modules
