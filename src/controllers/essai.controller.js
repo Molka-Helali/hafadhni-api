@@ -36,6 +36,11 @@ class essaiController extends IBaseController {
   }
   
 }
+loginUser = async (req, res) => {
+  await this.handleRequest(this.essaiService.loginUser(req.body), res);
+};
+
+
 
 // Exporting the essaiController class to be used in other modules
 module.exports = essaiController;

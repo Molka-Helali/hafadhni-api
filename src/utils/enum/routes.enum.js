@@ -16,5 +16,5 @@ module.exports = {
     PATCH_PHOTO:"/photo",
     PATCH_Text:"/text",
     PATCH_Utilisateur:"/utilisateur",
-  
+    PATCH_login:"/loginUser"
 };

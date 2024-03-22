@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const essaiSchema = new mongoose.Schema({
+  
     utilisateur: [{
         nom: { type: String },
         prenom: { type: String },
@@ -23,7 +24,7 @@ const essaiSchema = new mongoose.Schema({
     }],
     text: [{
         contenu: { type: String },
-    }]
+    }],
 });
 
 const Essai = mongoose.model('Essai', essaiSchema);
