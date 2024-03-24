@@ -17,7 +17,7 @@ class essaiRoutes extends BaseRoute {
         // Initializing an instance of essaiController and assigning it to the property essaiController of the essaiRoutes class
         this.essaiController = new essaiController();
         this.multerMiddleware= new multerMiddleware();
-
+       
         // Calling the setupRoutes method and catching any errors that occur
         this.setupRoutes().catch(error => {
             console.error('Error setting up routes:', error);
@@ -37,17 +37,24 @@ class essaiRoutes extends BaseRoute {
           // Binding the Custom method of the essaiController instance to the essaiController object
           const UpdateTextHandle  = this.essaiController.Text.bind(this.essaiController);
        // Binding the utilisateur method of the essaiController instance to the essaiController object
-const UpdateUtilisateurHandle = this.essaiController.utilisateur.bind(this.essaiController);
+        const UpdateUtilisateurHandle = this.essaiController.user.bind(this.essaiController);
+    // Binding the utilisateur method of the essaiController instance to the essaiController object
+        const UpdateRegisterHandle = this.essaiController.register.bind(this.essaiController);
        // Binding the utilisateur method of the essaiController instance to the essaiController object
-       const UpdateLoginHandle = this.essaiController.loginUser.bind(this.essaiController);
-
+       const UpdateLoginHandle = this.essaiController.login.bind(this.essaiController);
+       const authHandle = this.essaiController. getUserInfo.bind(this.essaiController);
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
         this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
         this.router.patch(routes. PATCH_PHOTO,UpdatePhotoHandle);
         this.router.patch(routes. PATCH_Text, UpdateTextHandle );
         this.router.patch(routes. PATCH_Utilisateur, UpdateUtilisateurHandle );
-        this.router.patch(routes. PATCH_login,  UpdateLoginHandle );
-       
+        this.router.post(routes. POST_USER, UpdateUtilisateurHandle );
+        this.router.get(routes. GetUserInfo, UpdateUtilisateurHandle );
+        this.router.patch(routes. PATCH_Register, UpdateRegisterHandle );
+        this.router.post(routes. POST,UpdateRegisterHandle );
+        this.router.post(routes.LOGIN,UpdateLoginHandle );  
+        this.router.get(routes.AUTH,authHandle);  
+        this.router.get(routes.GETINFO,authHandle);  
     
     }
 }

@@ -1,15 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
 const essaiSchema = new mongoose.Schema({
-  
-    utilisateur: [{
-        nom: { type: String },
-        prenom: { type: String },
-        motdepass: { type: String },
-        mail: { type: String },
-        telephone: { type: String }
-    }],
     testDate: { type: Date },
     name: { type: String },
     score: [{
