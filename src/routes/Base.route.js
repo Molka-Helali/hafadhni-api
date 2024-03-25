@@ -33,7 +33,6 @@ class BaseRoute {
         const createHandler = this.controller.Create.bind(this.controller);
         // Utilizing Multer middleware for handling file uploads before calling the createHandler.
         this.router.post(routes.CREATE, this.multerMiddleware.upload, createHandler);
-      
         // PUT route for updating an existing resource.
         const updateHandler = this.controller.Update.bind(this.controller);
         // Utilizing Multer middleware for handling file uploads before calling the updateHandler.

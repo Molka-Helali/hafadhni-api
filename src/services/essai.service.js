@@ -98,6 +98,7 @@ class EssaiService extends BaseService {
         throw new Error(`Error registering user: ${error.message}`);
     }
 }
+
  //@desc login as a user 
 //@params POST /v1/api/essai/login
 //@access  PUBLIC 
@@ -120,67 +121,8 @@ async login(data) {
       throw new Error(`Error registering user: ${error.message}`);
   }
 }
-//@desc get user information 
-//@params GET/v1/api/essai/
-//@access Privte
-/*async  getUserInfo(req,res) {
-  try {
- const userInfo = await user.findById(req.userId)
- res.json(userInfo)
-    res.json({ msg: 'User info fetched successfully.' });
-  } catch (error) {
-    return res.status(500).json({ success: false, msg: 'Internal server error.' });
-  }
-}*/
+
 }
-
-
-///authmid
-/*async authMiddleware(data) {
-  try {
-    const token = data.headers.token;
-    if (!token) {
-      return res.status(400).json({ success: false, msg: 'You are not authorized.' });
-    }
-    const verifyToken = await jwt.verify(token, JWT_SECRET);
-    next(); // Call next() to proceed to the next middleware or route handler
-  } catch (error) {
-    return res.status(401).json({ success: false, msg: 'Invalid or expired token.' });
-  }
-}/*
-
-*/
 module.exports = EssaiService;
     
   
-  
-  /*async loginUser(data) {
-    try {
-      const foundUser = await this.model.findOne({ mail: data.mail });
-      if (!foundUser) {
-        throw new Error('User not found');
-      }
-
-      const passwordMatch = await bcrypt.compare(data.motdepass, foundUser.motdepass);
-      if (!passwordMatch) {
-        throw new Error('Incorrect password');
-      }
-
-      const token = jwt.sign({ userId: foundUser._id }, 'your_secret_key', { expiresIn: '1h' });
-      return { token };
-    } catch (error) {
-      throw new Error(`Error logging in: ${error.message}`);
-    }
-  }
-}*/
-
-/*
-  const loginuser = async (req, res, next) => {
-  console.log(req.body);
-  try {
-    const foundUser = await userModel.findOne({ email: req.body.email });
-
-    if (foundUser) {
-      const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password);
-  */
-// Exporting the EssaiService class to be used in other modules

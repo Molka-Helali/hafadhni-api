@@ -3,6 +3,7 @@ const essaiService = require('../services/essai.service');
 // Importing the essai model from the "../models/essai.model" file
 const essai = require("../models/essai.model");
 const user = require("../models/user.model");
+
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 const Joi = require('joi');
@@ -45,7 +46,7 @@ class essaiController extends IBaseController {
     // Await and handle the promise returned by the service's utilisateur method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.user(req.body), res);
   }
-  
+    // Method for user registration
   register = async (req, res) => {
     try {
       // Validate the request body against the Joi schema
@@ -65,17 +66,16 @@ class essaiController extends IBaseController {
   login = async (req, res) => {
     await this.handleRequest(this.essaiService.login(req.body), res);
   };
-
+ // Middleware for authentication using JWT token
   auth = async (req, res, next) => {
     try {
       const token = req.headers.token;
+      console.log(token);
       if (!token) {
         return res.status(400).json({ success: false, msg: 'You are not authorized.' });
       }
-      const verifyToken = await jwt.verify(token, JWT_SECRET);
-      console.log(verifyToken);
-      res.userId=verifyToken.sub;
-      next();
+      const verifyToken = await jwt.verify(token, process.env.JWT_SECRET);
+      req.userId=verifyToken.sub;
       // Call next() to proceed to the next middleware or route handler
       next();
     } catch (error) {
@@ -83,25 +83,20 @@ class essaiController extends IBaseController {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   };
-  /*  return await this.model.findByIdAndUpdate(
-        { _id: data._id },
-        { $push: { score: data.score } }
-      ); */
-  //@desc get user information 
-//@params GET/v1/api/essai/auth
-//@access Privte
-async  getUserInfo(req, res) {
-  try {
-    const userInfo = await user.findById(req.userId).select('-password -__v');
-    if (!userInfo) {
-      return res.status(404).json({ success: false, msg: 'User not found.' });
+    //@desc get user information 
+    //@params GET/v1/api/essai/auth
+    //@access Privte
+  async  getUserInfo(req, res) {
+    try {
+      const userInfo = await user.findById( req.userId).select('-password -__v');
+      res.json({ userInfo });
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+      return res.status(500).json({ success: false, msg: 'Internal server error.' });
     }
-    res.json({ userInfo, msg: 'User info fetched successfully.' });
-  } catch (error) {
-    console.error('Error fetching user info:', error);
-    return res.status(500).json({ success: false, msg: 'Internal server error.' });
   }
-}
+  
+
 }
 // Exporting the essaiController class to be used in other modules
 module.exports = essaiController;

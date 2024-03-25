@@ -42,7 +42,9 @@ class essaiRoutes extends BaseRoute {
         const UpdateRegisterHandle = this.essaiController.register.bind(this.essaiController);
        // Binding the utilisateur method of the essaiController instance to the essaiController object
        const UpdateLoginHandle = this.essaiController.login.bind(this.essaiController);
-       const authHandle = this.essaiController. getUserInfo.bind(this.essaiController);
+       const authHandle = this.essaiController. auth.bind(this.essaiController);
+       const getUserInfo= this.essaiController. getUserInfo.bind(this.essaiController);
+      
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
         this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
         this.router.patch(routes. PATCH_PHOTO,UpdatePhotoHandle);
@@ -54,7 +56,7 @@ class essaiRoutes extends BaseRoute {
         this.router.post(routes. POST,UpdateRegisterHandle );
         this.router.post(routes.LOGIN,UpdateLoginHandle );  
         this.router.get(routes.AUTH,authHandle);  
-        this.router.get(routes.GETINFO,authHandle);  
+        this.router.get(routes.GETINFO,getUserInfo);  
     
     }
 }
