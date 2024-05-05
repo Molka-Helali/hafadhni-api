@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // Import the configuration file for MongoDB connection details.
 const config = require('./config.js');
 // Define a class named DBConfig to encapsulate the MongoDB configuration.
+
 class DBConfig {
     // Constructor method for initializing the DBConfig class.
     constructor() {}

@@ -11,7 +11,6 @@ const schemaValidation = Joi.object({
   userName: Joi.string().alphanum().min(3).max(30).required(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
   email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-  phone: Joi.string().required()
 });
 
 // Importing the IBaseController module from the "./IBase.controller" file
@@ -26,6 +25,11 @@ class essaiController extends IBaseController {
     this.essaiService = new essaiService(essai);
   }
 
+
+
+
+
+ 
   // Defining a custom method called Custom that takes in request (req) and response (res) objects
   Custom = async (req, res) => {
     // Await and handle the promise returned by the service's custom method, passing the request body as a parameter.
@@ -37,12 +41,20 @@ class essaiController extends IBaseController {
     await this.handleRequest(this.essaiService.customPhoto(req.body), res);
   }
 
-  Text = async (req, res) => {
+  Text = async (req, res) => { 
     // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.Text(req.body), res);
   }
+  Translation = async (req, res) => {
+    // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
+    await this.handleRequest(this.essaiService.translation(req.body), res);
+  }
+  SummaryText = async (req, res) => {
+    // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
+    await this.handleRequest(this.essaiService.summaryText(req.body), res);
+  }
 
-  user = async (req, res) => {
+  /*user = async (req, res) => {
     // Await and handle the promise returned by the service's utilisateur method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.user(req.body), res);
   }
@@ -96,7 +108,7 @@ class essaiController extends IBaseController {
     }
   }
   
-
+*/
 }
 // Exporting the essaiController class to be used in other modules
 module.exports = essaiController;

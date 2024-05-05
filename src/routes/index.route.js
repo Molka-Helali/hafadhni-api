@@ -4,11 +4,15 @@ const express = require('express');
 const router = express.Router();
 // Importing the ExampleRoutes module from './example.route'
 const EssaiRoutes = require('./essai.route'); // Change variable name to EssaiRoutes
+const UserRoutes = require('./user.route '); // Change variable name to EssaiRoutes
 // Importing the MODELS enum from the '../utils/enum/routes.enum' file
 const { MODELS } = require("../utils/enum/routes.enum");
+
 // Creating an instance of ExampleRoutes
 const essaiRoutes = new EssaiRoutes(); // Change variable name to EssaiRoutes
+const userRoutes = new  UserRoutes();
 // Mounting the exampleRoutes router under the path specified by MODELS.EXAMPLE
 router.use(MODELS.essai, essaiRoutes.getRouter());
+router.use(MODELS.user, userRoutes.getRouter());
 // Exporting the router to be used in other modules
 module.exports = router;

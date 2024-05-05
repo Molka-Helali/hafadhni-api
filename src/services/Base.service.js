@@ -78,6 +78,13 @@ class BaseService {
             throw new Error(`Error updating entity: ${error.message}`);
         }
     }
+    async filter(data){
+        try{
+            return await this.model.find(data);
+        } catch (error){
+            throw new Error(`Error ${error.message} while fetching entity by ${data}`)
+        }
+    }
     // Method to delete an entity from the database
     /*async delete(id, hasImage = false) {
         try {
@@ -131,6 +138,7 @@ class BaseService {
         await fs.unlink(imagePath);
         console.log(`${filename} successfully deleted`);
     }
+    
 }
 // Exporting the BaseService class to be used in other modules
 module.exports = BaseService;

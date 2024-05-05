@@ -40,7 +40,8 @@ class BaseRoute {
         // DELETE route for deleting a resource by ID.
         const deleteHandler = this.controller.Delete.bind(this.controller);
         this.router.delete(routes.DELETE, deleteHandler);
-        
+        const filterHandler = this.controller.Filter.bind(this.controller);
+        this.router.get(routes.FILTER, filterHandler);
         // Return the configured router instance.
         return this.router;
     }

@@ -1,26 +1,26 @@
 // Importing the BaseService module from "./Base.service"
 const BaseService = require("./Base.service");
-// Importing the essai model from "../models/essai.model"
-const Essai = require("../models/essai.model");
-/*const user = require("../models/user.model");*/
+// Importing the user model from "../models/user.model"
+
+
+const user = require("../models/user.model");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); // Import JWT library
 const { date } = require("joi");
 
 
-// Defining a new class EssaiService which extends BaseService
-class EssaiService extends BaseService {
+// Defining a new class userService which extends BaseService
+class userService extends BaseService {
   constructor() {
-    // Calling the constructor of the parent class (BaseService) and passing the Essai model
-    super(Essai);
+    // Calling the constructor of the parent class (BaseService) and passing the user model
+    super(user);
    
   }
 
-
   // Defining a custom method called custom that takes in data as a parameter
-  async custom(data) {
+ /* async custom(data) {
     try {
-      // Updating the Essai model by pushing the score data to the specified entity
+      // Updating the user model by pushing the score data to the specified entity
       return await this.model.findByIdAndUpdate(
         { _id: data._id },
         { $push: { score: data.score } }
@@ -29,12 +29,12 @@ class EssaiService extends BaseService {
       // Throwing an error if there's an issue updating the entity
       throw new Error(`Error updating entity by ID: ${error.message}`);
     }
-  }
+  }*/
 
   // Defining a custom method called customPhoto that takes in data and _id as parameters
-  async customPhoto(data) {
+  /*async customPhoto(data) {
     try {
-      // Updating the Essai model by pushing the photo data to the specified entity
+      // Updating the user model by pushing the photo data to the specified entity
       return await this.model.findByIdAndUpdate(
         { _id: data._id },
         { $push: { photo: data.photo } }
@@ -43,12 +43,12 @@ class EssaiService extends BaseService {
       // Throwing an error if there's an issue updating the entity
       throw new Error(`Error updating entity by ID: ${error.message}`);
     }
-  }
+  }*/
 
   // Defining a custom method called customText that takes in data as a parameter
-  async Text(data) {
+  /*async Text(data) {
     try {
-      // Updating the Essai model by pushing the Text data to the specified entity
+      // Updating the user model by pushing the Text data to the specified entity
       return await this.model.findByIdAndUpdate(
         { _id: data._id },
         { $push: { text: data.text } }
@@ -57,37 +57,14 @@ class EssaiService extends BaseService {
       // Throwing an error if there's an issue updating the entity
       throw new Error(`Error updating entity by ID: ${error.message}`);
     }
-  }
-  async translation(data) {
-    try {
-      // Updating the Essai model by pushing the Text data to the specified entity
-      return await this.model.findByIdAndUpdate(
-        { _id: data._id },
-        { $push: { translation: data.translation } }
-      );
-    } catch (error) {
-      // Throwing an error if there's an issue updating the entity
-      throw new Error(`Error updating entity by ID: ${error.message}`);
-    }
-  }
-  async summaryText(data) {
-    try {
-      // Updating the Essai model by pushing the Text data to the specified entity
-      return await this.model.findByIdAndUpdate(
-        { _id: data._id },
-        { $push: {summaryText: data.summaryText} }
-      );
-    } catch (error) {
-      // Throwing an error if there's an issue updating the entity
-      throw new Error(`Error updating entity by ID: ${error.message}`);
-    }
-  }
+  }*/
+
  //@desc register a new user 
-//@params POST /v1/api/essai/
+//@params POST /v1/api/user/
 //@access  PUBLIC 
-  /*async user(data) {
+  async user(data) {
     try {
-      // Updating the essai model by pushing the Text data to the specified entity
+      // Updating the user model by pushing the Text data to the specified entity
       return await  this.model.findByIdAndUpdate(
         { _id: data._id },
         { $push: { user: data.user } }
@@ -99,7 +76,7 @@ class EssaiService extends BaseService {
   }
 
  //@desc register a new user 
-//@params POST /v1/api/essai/register
+//@params POST /v1/api/user/register
 //@access  PUBLIC 
   async register(data) {
     try {
@@ -127,7 +104,7 @@ class EssaiService extends BaseService {
 }
 
  //@desc login as a user 
-//@params POST /v1/api/essai/login
+//@params POST /v1/api/user/login
 //@access  PUBLIC 
 async login(data) {
   try {
@@ -143,13 +120,15 @@ async login(data) {
     }
       const token = jwt.sign({ sub: existUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-      return { success:true,token};
+      return { success:true,token, id: existUser._id};
   } catch (error) {
       throw new Error(`Error registering user: ${error.message}`);
   }
 }
-*/
+
+
+
 }
-module.exports = EssaiService;
+module.exports = userService;
     
   

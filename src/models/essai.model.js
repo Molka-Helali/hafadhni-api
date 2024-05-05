@@ -1,21 +1,33 @@
 const mongoose = require('mongoose');
+
 const essaiSchema = new mongoose.Schema({
-    testDate: { type: Date },
-    name: { type: String },
-    score: [{
-        dateTime: { type: Date },
-        pourcentage: { type: Number }, // Corrected spelling of "pourcentage"
-        mention: { type: String }
-    }],
-    photo: [{
-        donnees: { type: String }, // Corrected spelling of "donnees"
-        path: { type: String },
-        taille: { type: Number },
-    }],
-    text: [{
-        contenu: { type: String },
-    }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  },
+  testDate: { type: Date },
+  name: { type: String },
+  score: [{
+    dateTime: { type: Date },
+    percentage: { type: Number },
+    mention: { type: String }
+  }],
+  photo: [{
+    name:{type:String}
+}],
+  text: [{
+    content: { type: String },
+  }],
+  translation: [{
+    translationName: { type: String },
+  }],
+  summaryText: [{ 
+    text: { type: String }, 
+  }],
 });
 
 const Essai = mongoose.model('Essai', essaiSchema);
+
 module.exports = Essai;
+
+

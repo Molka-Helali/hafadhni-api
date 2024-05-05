@@ -23,7 +23,7 @@ class essaiRoutes extends BaseRoute {
             console.error('Error setting up routes:', error);
         });
     }
-
+   
     // Asynchronously setting up routes
     async setupRoutes() {
         // Calling the setupRoutes method of the parent class (BaseRoute)
@@ -31,32 +31,36 @@ class essaiRoutes extends BaseRoute {
 
         // Binding the Custom method of the essaiController instance to the essaiController object
         const UpdateScoreHandle = this.essaiController.Custom.bind(this.essaiController);
-        
+      
         // Binding the Custom method of the essaiController instance to the essaiController object
         const UpdatePhotoHandle  = this.essaiController.CustomPhoto.bind(this.essaiController);
           // Binding the Custom method of the essaiController instance to the essaiController object
           const UpdateTextHandle  = this.essaiController.Text.bind(this.essaiController);
+          const UpdateTranslationHandle  = this.essaiController.Translation.bind(this.essaiController);
+          const UpdateSummaryTextHandle  = this.essaiController.SummaryText.bind(this.essaiController);
        // Binding the utilisateur method of the essaiController instance to the essaiController object
-        const UpdateUtilisateurHandle = this.essaiController.user.bind(this.essaiController);
+       /* const UpdateUtilisateurHandle = this.essaiController.user.bind(this.essaiController);*/
     // Binding the utilisateur method of the essaiController instance to the essaiController object
-        const UpdateRegisterHandle = this.essaiController.register.bind(this.essaiController);
+      /*  const UpdateRegisterHandle = this.essaiController.register.bind(this.essaiController);*/
        // Binding the utilisateur method of the essaiController instance to the essaiController object
-       const UpdateLoginHandle = this.essaiController.login.bind(this.essaiController);
-       const authHandle = this.essaiController. auth.bind(this.essaiController);
-       const getUserInfo= this.essaiController. getUserInfo.bind(this.essaiController);
+      /* const UpdateLoginHandle = this.essaiController.login.bind(this.essaiController);*/
+       /*const authHandle = this.essaiController. auth.bind(this.essaiController);
+       const getUserInfo= this.essaiController. getUserInfo.bind(this.essaiController);*/
       
         // Adding a GET route with the path specified in the routes enum, using the getByPriceHandler as the route handler
-        this.router.patch(routes.PATCH_SCORE, UpdateScoreHandle );
-        this.router.patch(routes. PATCH_PHOTO,UpdatePhotoHandle);
-        this.router.patch(routes. PATCH_Text, UpdateTextHandle );
-        this.router.patch(routes. PATCH_Utilisateur, UpdateUtilisateurHandle );
+        this.router.post(routes.Summary, UpdateSummaryTextHandle);
+        this.router.post(routes.Translation, UpdateTranslationHandle);
+        this.router.post(routes.PATCH_SCORE, UpdateScoreHandle );
+        this.router.post(routes. PATCH_PHOTO,UpdatePhotoHandle);
+        this.router.post(routes. PATCH_Text, UpdateTextHandle );
+        /*this.router.patch(routes. PATCH_Utilisateur, UpdateUtilisateurHandle );
         this.router.post(routes. POST_USER, UpdateUtilisateurHandle );
         this.router.get(routes. GetUserInfo, UpdateUtilisateurHandle );
         this.router.patch(routes. PATCH_Register, UpdateRegisterHandle );
         this.router.post(routes. POST,UpdateRegisterHandle );
         this.router.post(routes.LOGIN,UpdateLoginHandle );  
         this.router.get(routes.AUTH,authHandle);  
-        this.router.get(routes.GETINFO,getUserInfo);  
+        this.router.get(routes.GETINFO,getUserInfo);  */
     
     }
 }

@@ -1,7 +1,7 @@
 class CorsConfig {
     constructor() {
         // Default allowed origins for CORS
-        this.origin = ['*'];
+        this.origin = ['http://localhost:3000'];
         // Default allowed HTTP methods for CORS
         this.methods = ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS'];
     }

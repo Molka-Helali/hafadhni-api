@@ -1,20 +1,28 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const { Roles } = require("../utils/enum/roles.enum");
 
-// Define the schema for the User model
-const userSchema = new mongoose.Schema({
-    userName: { type: String },
-    password: { type: String },
-    email: { type: String },
-    phone: { type: String }
-
+const userSchema = new Schema({
+  essai: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Essai',
+  }],
+  userName: { type: String },
+  password: { type: String },
+  email: { type: String },
+  role: {
+    type: String,
+    enum: Object.values(Roles),
+    default: Roles.USER
+  }
 });
 
-// Create the User model using the schema
-const user = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
 
 
-// Export the User model to be used in other parts of the application
-module.exports = user;
+
 /*
 
 {
