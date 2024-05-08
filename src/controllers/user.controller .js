@@ -11,10 +11,12 @@ const schemaValidation = Joi.object({
   userName: Joi.string().alphanum().min(3).max(30).required(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
   email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+  
 });
 
 // Importing the IBaseController module from the "./IBase.controller" file
 const IBaseController = require("./IBase.controller");
+const { Roles } = require('../utils/enum/roles.enum');
 
 // Defining a new class userController which extends IBaseController
 class userController extends IBaseController {
