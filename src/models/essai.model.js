@@ -1,9 +1,9 @@
+const { required } = require('joi');
 const mongoose = require('mongoose');
 
 const essaiSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model
+  userId: {
+      type : String
   },
   testDate: { type: Date },
   name: { type: String },
