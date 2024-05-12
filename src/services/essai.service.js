@@ -34,16 +34,30 @@ class EssaiService extends BaseService {
   // Defining a custom method called customPhoto that takes in data and _id as parameters
   async customPhoto(data) {
     try {
-      console.log("data photo", data);
-      await Essai.findByIdAndUpdate(data._id, { $push: { photo: data.photo } });
-      // Attempting to find entities in the essai model based on the provided data
-      return await Essai.find(data);
-    } catch (error) {
-      // Throwing an error if there's an issue fetching entities
-      throw new Error(`Error add essai photo: ${error.message}`);
-    }
-  }
+        const { _id, photo } = data;
 
+        // Check if the document exists
+        const existingDocument = await this.model.findById(_id);
+        if (!existingDocument) {
+            throw new Error('Document not found.');
+        }
+
+        // Validate photo data structure
+        if (!photo || !Array.isArray(photo)) {
+            throw new Error('Invalid photo data format.');
+        }
+
+        // Extract photo names from the data and push to the existing photo array
+        const photoNames = photo.map(item => ({ name: item.name }));
+        existingDocument.photo.push(...photoNames);
+
+        // Save the updated document
+        const updatedDocument = await existingDocument.save();
+        return updatedDocument;
+    } catch (error) {
+        throw new Error(`Error adding essai photo: ${error.message}`);
+    }
+}
   // Defining a custom method called customText that takes in data as a parameter
   async Text(data) {
     try {
