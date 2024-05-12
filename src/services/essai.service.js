@@ -34,14 +34,13 @@ class EssaiService extends BaseService {
   // Defining a custom method called customPhoto that takes in data and _id as parameters
   async customPhoto(data) {
     try {
-      // Updating the Essai model by pushing the photo data to the specified entity
-      return await this.model.findByIdAndUpdate(
-        { _id: data._id },
-        { $push: { photo: data.photo } }
-      );
+      console.log("data photo", data);
+      await Essai.findByIdAndUpdate(data._id, { $push: { photo: data.photo } });
+      // Attempting to find entities in the essai model based on the provided data
+      return await Essai.find(data);
     } catch (error) {
-      // Throwing an error if there's an issue updating the entity
-      throw new Error(`Error updating entity by ID: ${error.message}`);
+      // Throwing an error if there's an issue fetching entities
+      throw new Error(`Error add essai photo: ${error.message}`);
     }
   }
 

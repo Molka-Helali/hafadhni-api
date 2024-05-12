@@ -35,6 +35,8 @@ class essaiRoutes extends BaseRoute {
       
         // Binding the Custom method of the essaiController instance to the essaiController object
         const UpdatePhotoHandle  = this.essaiController.CustomPhoto.bind(this.essaiController);
+         // Binding the Custom method of the essaiController instance to the essaiController object
+   
           // Binding the Custom method of the essaiController instance to the essaiController object
           const UpdateTextHandle  = this.essaiController.Text.bind(this.essaiController);
           const UpdateTranslationHandle  = this.essaiController.Translation.bind(this.essaiController);
@@ -52,7 +54,8 @@ class essaiRoutes extends BaseRoute {
         this.router.post(routes.Summary, UpdateSummaryTextHandle);
         this.router.post(routes.Translation, UpdateTranslationHandle);
         this.router.post(routes.PATCH_SCORE, UpdateScoreHandle );
-        this.router.post(routes. PATCH_PHOTO,UpdatePhotoHandle);
+        this.router.patch(routes.PATCH_PHOTO,  this.multerMiddleware.upload, UpdatePhotoHandle);
+     
        // this.router.post(routes. PATCH_Text, UpdateTextHandle );
         /*this.router.patch(routes. PATCH_Utilisateur, UpdateUtilisateurHandle );
         this.router.post(routes. POST_USER, UpdateUtilisateurHandle );

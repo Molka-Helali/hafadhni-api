@@ -15,12 +15,13 @@ class MulterMiddleware {
             }
         });
         // Creating an instance of multer with the defined storage engine
-        this.upload = multer({ storage: this.storage }).array("photos", 5);
+        this.upload = multer({ storage: this.storage }).array("images", 5);
     }
     // Method to handle uploading of multiple images
     
    uploadMultipleImages = (req, res) => {
         return req.files; // Return uploaded files
+      
     };
     
 }
