@@ -39,32 +39,27 @@ class essaiController extends IBaseController {
 
   CustomPhoto = async (req, res) => {
     const _id = req.params.id;
-    // image
     let photo = [];
-    // Loop through all uploaded files
-    req.files.forEach((oneImage) => {
-      // Create a new image object for each file
-      let image = { name: oneImage.filename };
-      photo.push(image);
-    });
-  
+    // Check if files were uploaded
+    if (req.files && req.files.length > 0) {
+      req.files.forEach((oneImage) => {
+        let image = { name: oneImage.filename };
+        photo.push(image);
+      });
+    }
     const data = { _id, photo };
     const messages = {
       message: "Images have been added successfully",
       status: "success",
     };
-    // Await and handle the promise returned by the service's customPhoto method, passing the data object as a parameter.
     try {
       const result = await this.essaiService.customPhoto(data);
-      // Send the response with success message
       res.status(200).json(messages);
     } catch (error) {
-      // Handle any errors and send an appropriate response
       console.error("Error in CustomPhoto:", error);
       res.status(500).json({ message: "Internal Server Error", status: "error" });
     }
   };
-
   Text = async (req, res) => { 
     // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.Text(req.body), res);
@@ -78,61 +73,7 @@ class essaiController extends IBaseController {
     await this.handleRequest(this.essaiService.summaryText(req.body), res);
   }
 
-  /*user = async (req, res) => {
-    // Await and handle the promise returned by the service's utilisateur method, passing the request body as a parameter.
-    await this.handleRequest(this.essaiService.user(req.body), res);
-  }
-    // Method for user registration
-  register = async (req, res) => {
-    try {
-      // Validate the request body against the Joi schema
-      const validationResult = schemaValidation.validate(req.body);
-      if (validationResult.error) {
-        return res.status(400).json({ error: validationResult.error.details[0].message });
-      }
-  
-      // If validation passes, proceed with registering the user
-      await this.handleRequest(this.essaiService.register(req.body), res);
-    } catch (error) {
-      console.error('Error during registration:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
-   
-  login = async (req, res) => {
-    await this.handleRequest(this.essaiService.login(req.body), res);
-  };
- // Middleware for authentication using JWT token
-  auth = async (req, res, next) => {
-    try {
-      const token = req.headers.token;
-      console.log(token);
-      if (!token) {
-        return res.status(400).json({ success: false, msg: 'You are not authorized.' });
-      }
-      const verifyToken = await jwt.verify(token, process.env.JWT_SECRET);
-      req.userId=verifyToken.sub;
-      // Call next() to proceed to the next middleware or route handler
-      next();
-    } catch (error) {
-      console.error('Error during authentication:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
-    //@desc get user information 
-    //@params GET/v1/api/essai/auth
-    //@access Privte
-  async  getUserInfo(req, res) {
-    try {
-      const userInfo = await user.findById( req.userId).select('-password -__v');
-      res.json({ userInfo });
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-      return res.status(500).json({ success: false, msg: 'Internal server error.' });
-    }
-  }
-  
-*/
+
 }
 // Exporting the essaiController class to be used in other modules
 module.exports = essaiController;

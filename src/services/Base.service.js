@@ -40,7 +40,8 @@ class BaseService {
                 // If the request includes image files, upload them and add their filenames to the data
                 const uploadedImages = await this._uploadImages(req, res);
                 if (uploadedImages) {
-                    data.images = uploadedImages.map(file => file.filename);
+                    // Map the uploaded images to an array of objects with 'name' property
+                    data.images = uploadedImages.map(file => ({ name: file.filename }));
                 }
             }
             // Creating a new document in the MongoDB collection with the provided data
@@ -49,6 +50,7 @@ class BaseService {
             throw new Error(`Error creating entity: ${error.message}`);
         }
     }
+    
     // Method to update an existing entity in the database
     async update(req, res = null, hasImage = false) {
         try {

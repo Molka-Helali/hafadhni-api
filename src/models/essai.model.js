@@ -12,9 +12,9 @@ const essaiSchema = new mongoose.Schema({
     percentage: { type: Number },
     mention: { type: String }
   }],
-  photo: [{
-    name:{type:String}
-}],
+  images: [{
+    name: { type: String } // Assuming 'name' is the filename of the image
+  }],
   text: [{
     content: { type: String },
   }],

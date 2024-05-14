@@ -17,7 +17,6 @@ module.exports = {
     Translation:"/Translation",
     Summary:"/Summary",
     PATCH_SCORE:"/score",
-   
     PATCH_PHOTO: "/photo/:id",
     PATCH_Text:"/text",
     Get_Info:'/info',
