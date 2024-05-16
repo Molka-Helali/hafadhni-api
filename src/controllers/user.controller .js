@@ -61,7 +61,7 @@ class userController extends IBaseController {
         return res.status(400).json({ success: false, msg: 'You are not authorized.' });
       }
       const verifyToken = await jwt.verify(token, process.env.JWT_SECRET);
-      req.userId=verifyToken.sub;
+      req._id=verifyToken.sub;
       // Call next() to proceed to the next middleware or route handler
       next();
     } catch (error) {
@@ -74,7 +74,7 @@ class userController extends IBaseController {
     //@access Privte
   async  getUserInfo(req, res) {
     try {
-      const userInfo = await user.findById( req.userId).select('-password -__v');
+      const userInfo = await user.findById( req._id).select('-password -__v');
       res.json({ userInfo });
     } catch (error) {
       console.error('Error fetching user info:', error);

@@ -165,4 +165,3 @@ async login(data) {
 }
 module.exports = EssaiService;
     
-  
