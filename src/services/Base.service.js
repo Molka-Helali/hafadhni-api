@@ -34,22 +34,13 @@ class BaseService {
             throw new Error(`Error fetching entity by ID: ${error.message}`);
         }
     }
-
     async create(req, res = null, hasImage = false) {
         try {
             const data = req.body; // Extracting data from the request body
-            
-            // Check if the _id is provided and if a document with that _id already exists
-            if (data._id) {
-                const existingDoc = await this.model.findById(data._id);
-                if (existingDoc) {
-                    throw new Error(`Document with _id ${data._id} already exists.`);
-                }
-            } else {
-                // Generate a new _id if it's not provided in the request
-                data._id = new mongoose.Types.ObjectId(); // Using new ObjectId() to generate ObjectId
-            }
-        
+    
+            // Generate a new _id for each upload
+            data._id = new mongoose.Types.ObjectId();
+           
             if (hasImage) {
                 // If the request includes image files, upload them and add their filenames to the data
                 const uploadedImages = await this._uploadImages(req, res);
@@ -61,13 +52,10 @@ class BaseService {
             // Creating a new document in the MongoDB collection with the provided data
             return await this.model.create(data);
         } catch (error) {
-            // Handle specific error cases, such as duplicate _id
-            if (error.message.includes('Document with _id')) {
-                throw new Error('Error creating entity: Document with this _id already exists.');
-            }
             throw new Error(`Error creating entity: ${error.message}`);
         }
     }
+    
     // Method to update an existing entity in the database
     async update(req, res = null, hasImage = false) {
         try {

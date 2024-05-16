@@ -29,5 +29,3 @@ const essaiSchema = new mongoose.Schema({
 const Essai = mongoose.model('Essai', essaiSchema);
 
 module.exports = Essai;
-
-

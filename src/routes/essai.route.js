@@ -63,65 +63,64 @@ class essaiRoutes extends BaseRoute {
         this.router.get(routes.AUTH,authHandle);  
         this.router.get(routes.GETINFO,getUserInfo);  */
     
-
         this.router.post("/text", async (req, res) => {
-            const { text, userId } = req.body;
-            console.log(req.body);
+          const { text, _id } = req.body;
+          console.log(req.body);
+          
+          try {
+            let existEssai = await Essai.findOne({ _id });
             
-            try {
-              let existEssai = await Essai.findOne({ userId });
-              
-              if (existEssai) {
-                existEssai.summaryText.push({ text }); 
-                existEssai = await existEssai.save();
-              } else {
-                const essai = new Essai({
-                  userId: userId,
-                  summaryText: [{ text }],
-                });
-                existEssai = await essai.save();
-              }
-              
-              res.status(200).json(existEssai);
-            } catch (error) {
-              res.status(400).json({ error: error.message });
-              console.log(error.message); 
+            if (existEssai) {
+              existEssai.summaryText.push({ text }); 
+              existEssai = await existEssai.save();
+            } else {
+              const essai = new Essai({
+                _id: _id,
+                summaryText: [{ text }],
+              });
+              existEssai = await essai.save();
             }
-          });
-          
-          
-          
-          
-  
-          this.router.post("/text/hafathni", async (req, res) => {
-            const { content  , userId} = req.body;
-            console.log(req.body)
-            try {
-              let existEssai = await Essai.findOne({ userId });
-              console.log(existEssai)
-              
-              if (existEssai) {
-                existEssai.text.push({ content }); 
-                existEssai = await existEssai.save();
-              } else {
-                const essai = new Essai({
-                  userId: userId,
-                  text: [{ content }],
-                });
-                existEssai = await essai.save();
-              }
-              
-              res.status(200).json(existEssai);
-            } catch (error) {
-              res.status(400).json({ error: error.message });
-              console.log(error.message); 
+            
+            res.status(200).json(existEssai);
+          } catch (error) {
+            res.status(400).json({ error: error.message });
+            console.log(error.message); 
+          }
+        });
+        
+        
+        
+        
+
+        this.router.post("/text/hafathni", async (req, res) => {
+          const { content , _id} = req.body;
+          console.log(req.body)
+          try {
+            let existEssai = await Essai.findOne({ _id});
+            console.log(existEssai)
+            
+            if (existEssai) {
+              existEssai.text.push({ content }); 
+              existEssai = await existEssai.save();
+            } else {
+              const essai = new Essai({
+               _id: _id,
+                text: [{ content }],
+              });
+              existEssai = await essai.save();
             }
-          });
+            
+            res.status(200).json(existEssai);
+          } catch (error) {
+            res.status(400).json({ error: error.message });
+            console.log(error.message); 
+          }
+        });
 
 
 
 
-    }
+  }
 }
 
 // Exporting the essaiRoutes class to be used in other modules
