@@ -64,18 +64,18 @@ class essaiRoutes extends BaseRoute {
         this.router.get(routes.GETINFO,getUserInfo);  */
     
         this.router.post("/text", async (req, res) => {
-          const { text, _id } = req.body;
+          const { text, userId } = req.body;
           console.log(req.body);
           
           try {
-            let existEssai = await Essai.findOne({ _id });
+            let existEssai = await Essai.findOne({ userId });
             
             if (existEssai) {
               existEssai.summaryText.push({ text }); 
               existEssai = await existEssai.save();
             } else {
               const essai = new Essai({
-                _id: _id,
+               userId: userId,
                 summaryText: [{ text }],
               });
               existEssai = await essai.save();
@@ -93,10 +93,10 @@ class essaiRoutes extends BaseRoute {
         
 
         this.router.post("/text/hafathni", async (req, res) => {
-          const { content , _id} = req.body;
+          const { content , userId} = req.body;
           console.log(req.body)
           try {
-            let existEssai = await Essai.findOne({ _id});
+            let existEssai = await Essai.findOne({ userId});
             console.log(existEssai)
             
             if (existEssai) {
@@ -104,7 +104,7 @@ class essaiRoutes extends BaseRoute {
               existEssai = await existEssai.save();
             } else {
               const essai = new Essai({
-               _id: _id,
+               userId: userId,
                 text: [{ content }],
               });
               existEssai = await essai.save();
