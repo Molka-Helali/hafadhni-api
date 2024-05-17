@@ -39,27 +39,32 @@ class essaiController extends IBaseController {
 
   CustomPhoto = async (req, res) => {
     const _id = req.params.id;
+    // image
     let photo = [];
-    // Check if files were uploaded
-    if (req.files && req.files.length > 0) {
-      req.files.forEach((oneImage) => {
-        let image = { name: oneImage.filename };
-        photo.push(image);
-      });
-    }
+    // Loop through all uploaded files
+    req.files.forEach((oneImage) => {
+      // Create a new image object for each file
+      let image = { name: oneImage.filename };
+      photo.push(image);
+    });
+  
     const data = { _id, photo };
     const messages = {
       message: "Images have been added successfully",
       status: "success",
     };
+    // Await and handle the promise returned by the service's customPhoto method, passing the data object as a parameter.
     try {
       const result = await this.essaiService.customPhoto(data);
+      // Send the response with success message
       res.status(200).json(messages);
     } catch (error) {
+      // Handle any errors and send an appropriate response
       console.error("Error in CustomPhoto:", error);
       res.status(500).json({ message: "Internal Server Error", status: "error" });
     }
   };
+
   Text = async (req, res) => { 
     // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.Text(req.body), res);
@@ -72,7 +77,6 @@ class essaiController extends IBaseController {
     // Await and handle the promise returned by the service's CustomText method, passing the request body as a parameter.
     await this.handleRequest(this.essaiService.summaryText(req.body), res);
   }
-
 
 }
 // Exporting the essaiController class to be used in other modules

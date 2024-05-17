@@ -1,5 +1,6 @@
 // Importing the mongoose module for interacting with MongoDB
 const mongoose = require('mongoose');
+const Essai = require("../models/essai.model");
 // Importing the MulterMiddleware module from '../middlewares/multer.middleware' for handling file uploads
 const MulterMiddleware = require('../middlewares/multer.middleware');
 // Importing the fs module for file system operations, with promises support
@@ -34,28 +35,80 @@ class BaseService {
             throw new Error(`Error fetching entity by ID: ${error.message}`);
         }
     }
-    async create(req, res = null, hasImage = false) {
+    async create(req, res) {
         try {
-            const data = req.body; // Extracting data from the request body
+            const data = req.body;
+            const userId = data.userId;
     
-            // Generate a new _id for each upload
-            data._id = new mongoose.Types.ObjectId();
-           
-            if (hasImage) {
-                // If the request includes image files, upload them and add their filenames to the data
-                const uploadedImages = await this._uploadImages(req, res);
-                if (uploadedImages) {
-                    // Map the uploaded images to an array of objects with 'name' property
-                    data.images = uploadedImages.map(file => ({ name: file.filename }));
-                }
+            if (!userId) {
+                throw new Error("userId is required.");
             }
-            // Creating a new document in the MongoDB collection with the provided data
-            return await this.model.create(data);
+    
+            let existEssai = await Essai.findOne({ userId });
+    
+            if (existEssai) {
+                // User exists, update the existing document with the new image
+                if (req.files && req.files.length > 0) {
+                    const uploadedImages = await this._uploadImages(req, res);
+                    if (uploadedImages) {
+                        existEssai.images.push(...uploadedImages.map(file => ({ name: file.filename })));
+                    }
+                }
+                // Save the updated document
+                existEssai = await existEssai.save();
+            } else {
+                // User does not exist, create a new document
+                data._id = new mongoose.Types.ObjectId();
+                if (req.files && req.files.length > 0) {
+                    const uploadedImages = await this._uploadImages(req, res);
+                    if (uploadedImages) {
+                        data.images = uploadedImages.map(file => ({ name: file.filename }));
+                    }
+                }
+                existEssai = await this.model.create(data);
+            }
+    
+            res.status(200).json(existEssai);
         } catch (error) {
-            throw new Error(`Error creating entity: ${error.message}`);
+            res.status(400).json({ error: error.message });
+            console.log(error.message);
         }
     }
+    ///////////
+
+/*
+    async create(req, res) { // Removed default values for req, res, and userId
+        try {
+            const data = req.body;
+            const userId = req.body.userId; 
     
+            if (!userId) {
+                throw new Error("userId is required.");
+            }
+    
+            let existEssai = await Essai.findOne({ userId });
+    
+            if (existEssai) {
+                // Check if images are included in the request
+                if (req.files && req.files.length > 0) { // Simplified the condition
+                    // Handle image upload and update the existing Essai document
+                    const uploadedImages = await this._uploadImages(req, res);
+                    if (uploadedImages) {
+                        existEssai.images.push(...uploadedImages.map(file => ({ name: file.filename })));
+                    }
+                }
+    
+                const essai = new Essai(data);
+                existEssai = await essai.save();
+            }
+    
+            res.status(200).json(existEssai);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+            console.log(error.message);
+        }
+    }*/
+
     // Method to update an existing entity in the database
     async update(req, res = null, hasImage = false) {
         try {

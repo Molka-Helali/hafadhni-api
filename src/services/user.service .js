@@ -132,7 +132,7 @@ async login(data) {
       if (!validate) {
         return { success: false, status: 400, msg: 'Incorrect password ' };
     }
-    const token = jwt.sign({ sub: existUser._id, id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ sub: existUser._id, id: user._id, role: user.role}, process.env.JWT_SECRET, { expiresIn: '1h' });
 
       return { success:true,token, id: existUser._id, role: existUser.role};
   } catch (error) {

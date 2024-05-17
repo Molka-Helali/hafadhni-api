@@ -62,6 +62,7 @@ class userController extends IBaseController {
       }
       const verifyToken = await jwt.verify(token, process.env.JWT_SECRET);
       req._id=verifyToken.sub;
+      
       // Call next() to proceed to the next middleware or route handler
       next();
     } catch (error) {
